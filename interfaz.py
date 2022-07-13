@@ -3,6 +3,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 def clickBoton():
     print("hola mundo")
 
+def clickBoton1():
+    print("Boton 2")
+
 class Ui_Main(object):
     def setupUi(self, Main):
         Main.setObjectName("Main")
@@ -104,9 +107,10 @@ class Ui_Main(object):
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/img/img/escucha.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.escuchar.setIcon(icon)
+        #Eventos botones
         self.escuchar.setIconSize(QtCore.QSize(32, 32))
         self.escuchar.setChecked(True)
-        self.escuchar.clicked.connect(clickBoton)
+        self.escuchar.clicked.connect(clickBoton1)
         self.escuchar.setAutoDefault(False)
         self.escuchar.setDefault(False)
         self.escuchar.setObjectName("escuchar")
@@ -119,6 +123,9 @@ class Ui_Main(object):
         icon1.addPixmap(QtGui.QPixmap(":/img/img/barras-de-sonido.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.escuchar_2.setIcon(icon1)
         self.escuchar_2.setIconSize(QtCore.QSize(30, 30))
+        #Eventos botones
+        self.escuchar_2.setChecked(True)
+        self.escuchar_2.clicked.connect(clickBoton)
         self.escuchar_2.setShortcut("")
         self.escuchar_2.setCheckable(False)
         self.escuchar_2.setChecked(False)
