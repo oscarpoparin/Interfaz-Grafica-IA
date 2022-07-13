@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Main</class>
+ <widget class="QMainWindow" name="Main">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>567</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>900</width>
+    <height>576</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Main</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">*{
+font-family:Consolas;
+}
+
+QFrame{
+background:#4d4d4d;
+}
+
+QLabel#title{
+font-size:40px;
+color:#fff;
+}
+
+QLineEdit{
+border-radius:15px;
+}
+
+QPushButton#escuchar{
+font-size:30px;
+background:rgb(20, 41, 163);
+color:#fff;
+border-radius:none;
+border:none;
+padding:15px;
+}
+
+QPushButton#escuchar:hover{
+color:rgba(20, 41, 163, 0.733);
+border-radius:15px;
+color:#fff;
+}
+
+QPushButton{
+border-radius:none;
+border:2px solid #000;
+font-size:18px;
+color:#fff;
+}
+
+QPushButton:hover{
+background:rgb(15, 173, 212);
+border-radius:15px;
+color:#fff;
+border:none;
+}
+
+QPlainTextEdit{
+border:2px solid #000;
+border-radius:15px;
+color:#fff;
+font-size:20px;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>700</width>
+     <height>567</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>900</width>
+     <height>567</height>
+    </size>
+   </property>
+   <property name="sizeIncrement">
+    <size>
+     <width>700</width>
+     <height>0</height>
+    </size>
+   </property>
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>900</width>
+      <height>576</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>900</width>
+      <height>576</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="title">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>-1</y>
+       <width>891</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>Inteligencia Artificial</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="escuchar">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>490</y>
+       <width>210</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::StrongFocus</enum>
+     </property>
+     <property name="text">
+      <string>Escuchar</string>
+     </property>
+     <property name="icon">
+      <iconset resource="source5.qrc">
+       <normaloff>:/img/img/escucha.png</normaloff>:/img/img/escucha.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>32</width>
+       <height>32</height>
+      </size>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="escuchar_2">
+     <property name="geometry">
+      <rect>
+       <x>650</x>
+       <y>80</y>
+       <width>231</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::DefaultContextMenu</enum>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string>Hablar</string>
+     </property>
+     <property name="icon">
+      <iconset resource="source5.qrc">
+       <normaloff>:/img/img/barras-de-sonido.png</normaloff>:/img/img/barras-de-sonido.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="shortcut">
+      <string/>
+     </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+     <property name="autoRepeat">
+      <bool>false</bool>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+     <property name="autoRepeatInterval">
+      <number>100</number>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>true</bool>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="escuchar_3">
+     <property name="geometry">
+      <rect>
+       <x>650</x>
+       <y>130</y>
+       <width>231</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="text">
+      <string>Agregar Archivos</string>
+     </property>
+     <property name="icon">
+      <iconset resource="source5.qrc">
+       <normaloff>:/img/img/agregar-archivo.png</normaloff>:/img/img/agregar-archivo.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="default">
+      <bool>true</bool>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="escuchar_4">
+     <property name="geometry">
+      <rect>
+       <x>650</x>
+       <y>180</y>
+       <width>231</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="text">
+      <string>Agregar Apps</string>
+     </property>
+     <property name="icon">
+      <iconset resource="source5.qrc">
+       <normaloff>:/img/img/agregar-archivo.png</normaloff>:/img/img/agregar-archivo.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="default">
+      <bool>true</bool>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="escuchar_5">
+     <property name="geometry">
+      <rect>
+       <x>650</x>
+       <y>230</y>
+       <width>231</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="text">
+      <string>Agregar Paginas</string>
+     </property>
+     <property name="icon">
+      <iconset resource="source5.qrc">
+       <normaloff>:/img/img/agregar-archivo.png</normaloff>:/img/img/agregar-archivo.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="default">
+      <bool>true</bool>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="escuchar_6">
+     <property name="geometry">
+      <rect>
+       <x>650</x>
+       <y>280</y>
+       <width>231</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="text">
+      <string>Agregar Contacto</string>
+     </property>
+     <property name="icon">
+      <iconset resource="source5.qrc">
+       <normaloff>:/img/img/agregar-usuario.png</normaloff>:/img/img/agregar-usuario.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="default">
+      <bool>true</bool>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="escuchar_7">
+     <property name="geometry">
+      <rect>
+       <x>650</x>
+       <y>330</y>
+       <width>231</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="text">
+      <string>Paginas Agregadas</string>
+     </property>
+     <property name="icon">
+      <iconset resource="source5.qrc">
+       <normaloff>:/img/img/clip-de-papel.png</normaloff>:/img/img/clip-de-papel.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="default">
+      <bool>true</bool>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="escuchar_8">
+     <property name="geometry">
+      <rect>
+       <x>650</x>
+       <y>380</y>
+       <width>231</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="text">
+      <string>Apps Agregadas</string>
+     </property>
+     <property name="icon">
+      <iconset resource="source5.qrc">
+       <normaloff>:/img/img/clip-de-papel.png</normaloff>:/img/img/clip-de-papel.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>true</bool>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="escuchar_9">
+     <property name="geometry">
+      <rect>
+       <x>650</x>
+       <y>430</y>
+       <width>231</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="text">
+      <string>Archivos Agregados</string>
+     </property>
+     <property name="icon">
+      <iconset resource="source5.qrc">
+       <normaloff>:/img/img/clip-de-papel.png</normaloff>:/img/img/clip-de-papel.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="default">
+      <bool>true</bool>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="escuchar_10">
+     <property name="geometry">
+      <rect>
+       <x>650</x>
+       <y>480</y>
+       <width>231</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="text">
+      <string>Contactos Agregados</string>
+     </property>
+     <property name="icon">
+      <iconset resource="source5.qrc">
+       <normaloff>:/img/img/clip-de-papel.png</normaloff>:/img/img/clip-de-papel.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="default">
+      <bool>true</bool>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPlainTextEdit" name="plainTextEdit">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>90</y>
+       <width>241</width>
+       <height>401</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>110</y>
+       <width>281</width>
+       <height>341</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="source5.qrc">:/img/img/machine-learning.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources>
+  <include location="img/Nuevo Documento de texto.txt"/>
+  <include location="source5.qrc"/>
+ </resources>
+ <connections/>
+</ui>

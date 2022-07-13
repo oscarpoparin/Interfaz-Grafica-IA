@@ -1,0 +1,10 @@
+<RCC>
+  <qresource prefix="img">
+    <file>img/agregar-archivo.png</file>
+    <file>img/agregar-usuario.png</file>
+    <file>img/barras-de-sonido.png</file>
+    <file>img/clip-de-papel.png</file>
+    <file>img/escucha.png</file>
+    <file>img/machine-learning.png</file>
+  </qresource>
+</RCC>
