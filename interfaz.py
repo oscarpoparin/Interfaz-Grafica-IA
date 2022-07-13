@@ -3,8 +3,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 def clickBoton():
     print("hola mundo")
 
-def clickBoton1():
-    print("Boton 2")
+def run_oparin():
+    print("funcion principal")
 
 class Ui_Main(object):
     def setupUi(self, Main):
@@ -110,7 +110,7 @@ class Ui_Main(object):
         #Eventos botones
         self.escuchar.setIconSize(QtCore.QSize(32, 32))
         self.escuchar.setChecked(True)
-        self.escuchar.clicked.connect(clickBoton1)
+        self.escuchar.clicked.connect(run_oparin)
         self.escuchar.setAutoDefault(False)
         self.escuchar.setDefault(False)
         self.escuchar.setObjectName("escuchar")
