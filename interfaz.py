@@ -1,10 +1,34 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-def clickBoton():
-    print("hola mundo")
+def open_w_apps():
+    print("Agregar app")
+
+def open_w_pages():
+    print("agregar paginas")
+
+def open_w_contacts():
+    print("agregar contactos")
+
+def talk_pages():
+    print("paginas agregadas")
+
+def talk_apps():
+    print("app agregadas")
+
+def talk_files():
+    print("archivos agregados")
+
+def talk_contact():
+    print("contactos agregados")
+
+def read_and_talk():
+    print("funcion hablar")
 
 def run_oparin():
     print("funcion principal")
+
+def open_w_files():
+    print("Agregart archivos")
 
 class Ui_Main(object):
     def setupUi(self, Main):
@@ -107,8 +131,8 @@ class Ui_Main(object):
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/img/img/escucha.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.escuchar.setIcon(icon)
-        #Eventos botones
         self.escuchar.setIconSize(QtCore.QSize(32, 32))
+        #Eventos botones
         self.escuchar.setChecked(True)
         self.escuchar.clicked.connect(run_oparin)
         self.escuchar.setAutoDefault(False)
@@ -125,7 +149,7 @@ class Ui_Main(object):
         self.escuchar_2.setIconSize(QtCore.QSize(30, 30))
         #Eventos botones
         self.escuchar_2.setChecked(True)
-        self.escuchar_2.clicked.connect(clickBoton)
+        self.escuchar_2.clicked.connect(read_and_talk)
         self.escuchar_2.setShortcut("")
         self.escuchar_2.setCheckable(False)
         self.escuchar_2.setChecked(False)
@@ -143,6 +167,9 @@ class Ui_Main(object):
         icon2.addPixmap(QtGui.QPixmap(":/img/img/agregar-archivo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.escuchar_3.setIcon(icon2)
         self.escuchar_3.setIconSize(QtCore.QSize(30, 30))
+        #Eventos botones
+        self.escuchar_3.setChecked(True)
+        self.escuchar_3.clicked.connect(open_w_files)
         self.escuchar_3.setDefault(True)
         self.escuchar_3.setFlat(True)
         self.escuchar_3.setObjectName("escuchar_3")
@@ -151,6 +178,9 @@ class Ui_Main(object):
         self.escuchar_4.setLayoutDirection(QtCore.Qt.RightToLeft)
         self.escuchar_4.setIcon(icon2)
         self.escuchar_4.setIconSize(QtCore.QSize(30, 30))
+        #Eventos botones
+        self.escuchar_4.setChecked(True)
+        self.escuchar_4.clicked.connect(open_w_apps)
         self.escuchar_4.setDefault(True)
         self.escuchar_4.setFlat(True)
         self.escuchar_4.setObjectName("escuchar_4")
@@ -159,6 +189,9 @@ class Ui_Main(object):
         self.escuchar_5.setLayoutDirection(QtCore.Qt.RightToLeft)
         self.escuchar_5.setIcon(icon2)
         self.escuchar_5.setIconSize(QtCore.QSize(30, 30))
+        #Eventos botones
+        self.escuchar_5.setChecked(True)
+        self.escuchar_5.clicked.connect(open_w_pages)
         self.escuchar_5.setDefault(True)
         self.escuchar_5.setFlat(True)
         self.escuchar_5.setObjectName("escuchar_5")
@@ -169,6 +202,9 @@ class Ui_Main(object):
         icon3.addPixmap(QtGui.QPixmap(":/img/img/agregar-usuario.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.escuchar_6.setIcon(icon3)
         self.escuchar_6.setIconSize(QtCore.QSize(30, 30))
+        #Eventos botones
+        self.escuchar_6.setChecked(True)
+        self.escuchar_6.clicked.connect(open_w_contacts)
         self.escuchar_6.setDefault(True)
         self.escuchar_6.setFlat(True)
         self.escuchar_6.setObjectName("escuchar_6")
@@ -179,6 +215,9 @@ class Ui_Main(object):
         icon4.addPixmap(QtGui.QPixmap(":/img/img/clip-de-papel.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.escuchar_7.setIcon(icon4)
         self.escuchar_7.setIconSize(QtCore.QSize(30, 30))
+        #Eventos botones
+        self.escuchar_7.setChecked(True)
+        self.escuchar_7.clicked.connect(talk_pages)
         self.escuchar_7.setDefault(True)
         self.escuchar_7.setFlat(True)
         self.escuchar_7.setObjectName("escuchar_7")
@@ -187,6 +226,9 @@ class Ui_Main(object):
         self.escuchar_8.setLayoutDirection(QtCore.Qt.RightToLeft)
         self.escuchar_8.setIcon(icon4)
         self.escuchar_8.setIconSize(QtCore.QSize(30, 30))
+        #Eventos botones
+        self.escuchar_8.setChecked(True)
+        self.escuchar_8.clicked.connect(talk_apps)
         self.escuchar_8.setAutoDefault(False)
         self.escuchar_8.setDefault(True)
         self.escuchar_8.setFlat(True)
@@ -196,6 +238,9 @@ class Ui_Main(object):
         self.escuchar_9.setLayoutDirection(QtCore.Qt.RightToLeft)
         self.escuchar_9.setIcon(icon4)
         self.escuchar_9.setIconSize(QtCore.QSize(30, 30))
+        #Eventos botones
+        self.escuchar_9.setChecked(True)
+        self.escuchar_9.clicked.connect(talk_files)
         self.escuchar_9.setDefault(True)
         self.escuchar_9.setFlat(True)
         self.escuchar_9.setObjectName("escuchar_9")
@@ -204,6 +249,9 @@ class Ui_Main(object):
         self.escuchar_10.setLayoutDirection(QtCore.Qt.RightToLeft)
         self.escuchar_10.setIcon(icon4)
         self.escuchar_10.setIconSize(QtCore.QSize(30, 30))
+        #Eventos botones
+        self.escuchar_10.setChecked(True)
+        self.escuchar_10.clicked.connect(talk_contact)
         self.escuchar_10.setDefault(True)
         self.escuchar_10.setFlat(True)
         self.escuchar_10.setObjectName("escuchar_10")
