@@ -3,6 +3,7 @@ import speech_recognition as sr
 import subprocess as sub
 import pyttsx3
 import pywhatkit
+from sqlalchemy import false
 import wikipedia
 import datetime
 import keyboard
@@ -17,8 +18,8 @@ from pygame import mixer
 from chatterbot import ChatBot 
 from chatterbot.trainers import ListTrainer
 from chatterbot import preprocessors
+import source 
 
-main_window = Tk()
 
 #Inicio codigo 
 
@@ -208,365 +209,6 @@ key_words = {
     'buscame' : buscame,
 }
 
-#funcion principal
-
-def run_oparin():
-    chat = ChatBot('oparin', database_uri=None)
-    trainer = ListTrainer(chat)
-    trainer.train(database.get_questions_answers()) 
-    talk("Te escucho...")
-    print("te escucho")
-    while True:
-        try:
-            rec = listen("")
-            #rec = listen("Te escucho")
-        except UnboundLocalError:
-            talk("No te entendí, intenta de nuevo")
-            continue
-        if 'busca' in rec:
-            key_words['busca'](rec)
-            break
-        elif rec.split()[0] in key_words:
-            #for word in key_words:
-            #    if word in rec:
-            key_words[rec.split()[0] ](rec)
-        else:
-            print("Tu: " , rec)
-            answer = chat.get_response(rec)
-            print("bot ",answer)
-            if 'adios' in rec:
-                break
-    main_window.update()
-
-#funcion para escrirbir dentro de un documento
-
-def write(f):
-    talk("¿Qué quieres que escriba?")
-    rec_write = listen("Te escucho")
-    f.write(rec_write + os.linesep)
-    f.close()
-    talk("Listo, puedes revisarlo")
-    sub.Popen("notas.txt", shell=True)
-
-#Funciones para abrir, escribir y guardar datos
-
-def open_w_files():
-    global namefile_entry, pathf_entry
-    windows_files = Toplevel() # segunda ventana
-    windows_files.title("Agregar Archivos")
-    windows_files.geometry("300x200")
-    windows_files.resizable(0,0)
-    windows_files.configure(bg='#434343')
-    main_window.eval(f'tk::PlaceWindow {str(windows_files)} center') # centrar segunda ventana
-
-    title_label = Label(
-                            windows_files,
-                            text="Agregar Archivos",
-                            fg="#fff",
-                            bg="#434343",
-                            font=('Arial', 10, 'bold')
-                        )
-    title_label.pack(pady=3)
-    name_label = Label(
-                            windows_files,
-                            text="Nombre del Archivo",
-                            fg="#fff",
-                            bg="#434343",
-                            font=('Arial', 10, 'bold')
-                        )
-    name_label.pack(pady=2)
-
-    namefile_entry = Entry(windows_files)
-    namefile_entry.pack(pady=1)
-
-    path_label = Label(
-                            windows_files,
-                            text="Ruta del Archivo",
-                            fg="#fff",
-                            bg="#434343",
-                            font=('Arial', 10, 'bold')
-                        )
-    path_label.pack(pady=2)
-
-    pathf_entry = Entry(windows_files, width=35)
-    pathf_entry.pack(pady=1)
-
-    save_button = Button(
-                            windows_files,
-                            text="Guardar",
-                            bg="#16222a",
-                            fg="#fff",
-                            width=8,
-                            height=1,
-                            command=add_files
-                        )
-    save_button.pack(pady=5)
-
-
-def open_w_apps():
-    global nameapps_entry, pathapps_entry
-    windows_apps = Toplevel() # tercer ventana
-    windows_apps.title("Agregar una app")
-    windows_apps.geometry("300x200")
-    windows_apps.resizable(0,0)
-    windows_apps.configure(bg='#434343')
-    main_window.eval(f'tk::PlaceWindow {str(windows_apps)} center') # centrar segunda ventana
-
-    title_label = Label(
-                            windows_apps,
-                            text="Agregar una app",
-                            fg="#fff",
-                            bg="#434343",
-                            font=('Arial', 10, 'bold')
-                        )
-    title_label.pack(pady=3)
-    name_label = Label(
-                            windows_apps,
-                            text="Nombre de la app",
-                            fg="#fff",
-                            bg="#434343",
-                            font=('Arial', 10, 'bold')
-                        )
-    name_label.pack(pady=2)
-
-    nameapps_entry = Entry(windows_apps)
-    nameapps_entry.pack(pady=1)
-
-    path_label = Label(
-                            windows_apps,
-                            text="Ruta de la app",
-                            fg="#fff",
-                            bg="#434343",
-                            font=('Arial', 10, 'bold')
-                        )
-    path_label.pack(pady=2)
-
-    pathapps_entry = Entry(windows_apps, width=35)
-    pathapps_entry.pack(pady=1)
-
-    save_button = Button(
-                            windows_apps,
-                            text="Guardar",
-                            bg="#16222a",
-                            fg="#fff",
-                            width=8,
-                            height=1,
-                            command=add_apps
-                        )
-    save_button.pack(pady=5)
-
-def open_w_pages():
-    global namep_entry, pathp_entry
-    windows_pages = Toplevel() # cuarta ventana
-    windows_pages.title("Agregar una pagina web")
-    windows_pages.geometry("300x200")
-    windows_pages.resizable(0,0)
-    windows_pages.configure(bg='#434343')
-    main_window.eval(f'tk::PlaceWindow {str(windows_pages)} center') # centrar segunda ventana
-
-    title_label = Label(
-                            windows_pages,
-                            text="Agregar una pagina",
-                            fg="#fff",
-                            bg="#434343",
-                            font=('Arial', 10, 'bold')
-                        )
-    title_label.pack(pady=3)
-    name_label = Label(
-                            windows_pages,
-                            text="Nombre de la pagina",
-                            fg="#fff",
-                            bg="#434343",
-                            font=('Arial', 10, 'bold')
-                        )
-    name_label.pack(pady=2)
-
-    namep_entry = Entry(windows_pages)
-    namep_entry.pack(pady=1)
-
-    path_label = Label(
-                            windows_pages,
-                            text="URL de la pagina",
-                            fg="#fff",
-                            bg="#434343",
-                            font=('Arial', 10, 'bold')
-                        )
-    path_label.pack(pady=2)
-
-    pathp_entry = Entry(windows_pages, width=35)
-    pathp_entry.pack(pady=1)
-
-    save_button = Button(
-                            windows_pages,
-                            text="Guardar",
-                            bg="#16222a",
-                            fg="#fff",
-                            width=8,
-                            height=1,
-                            command=add_pages
-                        )
-    save_button.pack(pady=5)
-
-def open_w_contacts():
-    global namec_entry, pathc_entry
-    windows_contacts = Toplevel() # cuarta ventana
-    windows_contacts.title("Agregar contacto")
-    windows_contacts.geometry("300x200")
-    windows_contacts.resizable(0,0)
-    windows_contacts.configure(bg='#434343')
-    main_window.eval(f'tk::PlaceWindow {str(windows_contacts)} center') # centrar segunda ventana
-
-    title_label = Label(
-                            windows_contacts,
-                            text="Agregar contacto",
-                            fg="#fff",
-                            bg="#434343",
-                            font=('Arial', 10, 'bold')
-                        )
-    title_label.pack(pady=3)
-    name_label = Label(
-                            windows_contacts,
-                            text="Nombre del contacto",
-                            fg="#fff",
-                            bg="#434343",
-                            font=('Arial', 10, 'bold')
-                        )
-    name_label.pack(pady=2)
-
-    namec_entry = Entry(windows_contacts)
-    namec_entry.pack(pady=1)
-
-    path_label = Label(
-                            windows_contacts,
-                            text="Numero (codigo pais)",
-                            fg="#fff",
-                            bg="#434343",
-                            font=('Arial', 10, 'bold')
-                        )
-    path_label.pack(pady=2)
-
-    pathc_entry = Entry(windows_contacts, width=35)
-    pathc_entry.pack(pady=1)
-
-    save_button = Button(
-                            windows_contacts,
-                            text="Guardar",
-                            bg="#16222a",
-                            fg="#fff",
-                            width=8,
-                            height=1,
-                            command=add_contact
-                        )
-    save_button.pack(pady=5)
-
-#funcion para agregar archivos,paginas y apps
-
-def add_files():
-    name_file = namefile_entry.get().strip()
-    path_file = pathf_entry.get().strip()
-    files[name_file] = path_file
-    save_data(name_file, path_file, "archivos.txt")
-    namefile_entry.delete(0, "end")
-    pathf_entry.delete(0,"end")
-
-
-def add_apps():
-    name_app = nameapps_entry.get().strip()
-    path_app = pathapps_entry.get().strip()
-    programs[name_app] = path_app
-    save_data(name_app, path_app, "apps.txt")
-    nameapps_entry.delete(0, "end")
-    pathapps_entry.delete(0,"end")
-
-def add_pages():
-    name_pages = namep_entry.get().strip()
-    url_pages = pathp_entry.get().strip()
-    sites[name_pages] = url_pages
-    save_data(name_pages, url_pages, "pages.txt")
-    namep_entry.delete(0, "end")
-    pathp_entry.delete(0,"end")
-
-def add_contact():
-    name_contacto = namec_entry.get().strip()
-    path_contacto = pathc_entry.get().strip()
-    agenda[name_contacto] = path_contacto
-    save_data(name_contacto, path_contacto, "contactos.txt")
-    namec_entry.delete(0, "end")
-    pathc_entry.delete(0,"end")
-
-#funcion para guardar datos
-
-def save_data(key, value, file_name):
-    try:
-        with open(file_name, 'a') as f:
-            f.write(key + "," + value + "\n")
-    except FileNotFoundError:
-        file = open(file_name, 'a')
-        file.write(key + "," + value + "\n")
-
-#funcion para mostrar los datos almacenados
-
-def talk_pages():
-    if bool(sites) == True:
-        talk("Has agregado las siguientes paginas web")
-        for site in sites:
-            talk(site)
-    else:
-        talk("Aun no has agregado páginas web!")
-
-def talk_apps():
-    if bool(programs) == True:
-        talk("Has agregado las siguientes apps")
-        for app in programs:
-            talk(app)
-    else:
-        talk("Aun no has agregado apps!")
-
-def talk_files():
-    if bool(files) == True:
-        talk("Has agregado las siguientes archivos")
-        for file in files:
-            talk(file)
-    else:
-        talk("Aun no has agregado archivos!")
-
-def talk_contact():
-    if bool(agenda) == True:
-        talk("Has agregado los siguientes contactos")
-        for conta in agenda:
-            talk(conta)
-    else:
-        talk("Aun no hay contactos registrados!")
-
-#funcion para preguntar nombre
-def give_me_name():
-    talk("Hola, ¿Cómo te llamas?")
-    name = listen("Te escucho...")
-    name = name.strip()
-    talk(f"Bienvenido {name}")
-    try:
-        with open("name.txt", 'w') as f:
-            f.write(name)
-    except FileNotFoundError:
-        file = open("name.txt", 'w')
-        file.write(name)
-
-#funcion para decir nombre
-
-def say_hello():
-    if os.path.exists("name.txt"):
-        with open("name.txt") as f:
-            for name in f:
-                talk(f"Hola, bienvenido {name}")
-    else:
-        give_me_name()
-
-
-def thread_hello():
-    t = tr.Thread(target=say_hello)
-    t.start()
-
-thread_hello()
 
 
 class Ui_Main(object):
@@ -824,7 +466,373 @@ class Ui_Main(object):
         self.escuchar_9.setText(_translate("Main", "Archivos Agregados"))
         self.escuchar_10.setText(_translate("Main", "Contactos Agregados"))
 
-import source 
+#funcion principal
+
+def run_oparin():
+    chat = ChatBot('oparin', database_uri=None)
+    trainer = ListTrainer(chat)
+    trainer.train(database.get_questions_answers()) 
+    talk("Te escucho...")
+    print("te escucho")
+    while True:
+        try:
+            rec = listen("")
+            #rec = listen("Te escucho")
+        except UnboundLocalError:
+            talk("No te entendí, intenta de nuevo")
+            continue
+        if 'busca' in rec:
+            key_words['busca'](rec)
+            break
+        elif rec.split()[0] in key_words:
+            #for word in key_words:
+            #    if word in rec:
+            key_words[rec.split()[0] ](rec)
+        else:
+            print("Tu: " , rec)
+            answer = chat.get_response(rec)
+            print("bot ",answer)
+            if 'adios' in rec:
+                break
+    Ui_Main.update()
+
+#funcion para escrirbir dentro de un documento
+
+def write(f):
+    talk("¿Qué quieres que escriba?")
+    rec_write = listen("Te escucho")
+    f.write(rec_write + os.linesep)
+    f.close()
+    talk("Listo, puedes revisarlo")
+    sub.Popen("notas.txt", shell=True)
+
+#creacion de ventana con modulo tkinter
+
+windows = Tk()
+# Hide it with .withdraw
+windows.withdraw()
+# To reveal it again:
+windows.deiconify()
+
+#Funciones para abrir, escribir y guardar datos
+
+def open_w_files():
+    global namefile_entry, pathf_entry
+    windows_files = Toplevel() # segunda ventana
+    windows_files.title("Agregar Archivos")
+    windows_files.geometry("300x200")
+    windows_files.resizable(0,0)
+    windows_files.configure(bg='#434343')
+    windows.eval(f'tk::PlaceWindow {str(windows_files)} center') # centrar segunda ventana
+
+    title_label = Label(
+                            windows_files,
+                            text="Agregar Archivos",
+                            fg="#fff",
+                            bg="#434343",
+                            font=('Arial', 10, 'bold')
+                        )
+    title_label.pack(pady=3)
+    name_label = Label(
+                            windows_files,
+                            text="Nombre del Archivo",
+                            fg="#fff",
+                            bg="#434343",
+                            font=('Arial', 10, 'bold')
+                        )
+    name_label.pack(pady=2)
+
+    namefile_entry = Entry(windows_files)
+    namefile_entry.pack(pady=1)
+
+    path_label = Label(
+                            windows_files,
+                            text="Ruta del Archivo",
+                            fg="#fff",
+                            bg="#434343",
+                            font=('Arial', 10, 'bold')
+                        )
+    path_label.pack(pady=2)
+
+    pathf_entry = Entry(windows_files, width=35)
+    pathf_entry.pack(pady=1)
+
+    save_button = Button(
+                            windows_files,
+                            text="Guardar",
+                            bg="#16222a",
+                            fg="#fff",
+                            width=8,
+                            height=1,
+                            command=add_files
+                        )
+    save_button.pack(pady=5)
+
+
+def open_w_apps():
+    global nameapps_entry, pathapps_entry
+    windows_apps = Toplevel() # tercer ventana
+    windows_apps.title("Agregar una app")
+    windows_apps.geometry("300x200")
+    windows_apps.resizable(0,0)
+    windows_apps.configure(bg='#434343')
+    #Ui_Main.eval(f'tk::PlaceWindow {str(windows_apps)} center') # centrar segunda ventana
+
+    title_label = Label(
+                            windows_apps,
+                            text="Agregar una app",
+                            fg="#fff",
+                            bg="#434343",
+                            font=('Arial', 10, 'bold')
+                        )
+    title_label.pack(pady=3)
+    name_label = Label(
+                            windows_apps,
+                            text="Nombre de la app",
+                            fg="#fff",
+                            bg="#434343",
+                            font=('Arial', 10, 'bold')
+                        )
+    name_label.pack(pady=2)
+
+    nameapps_entry = Entry(windows_apps)
+    nameapps_entry.pack(pady=1)
+
+    path_label = Label(
+                            windows_apps,
+                            text="Ruta de la app",
+                            fg="#fff",
+                            bg="#434343",
+                            font=('Arial', 10, 'bold')
+                        )
+    path_label.pack(pady=2)
+
+    pathapps_entry = Entry(windows_apps, width=35)
+    pathapps_entry.pack(pady=1)
+
+    save_button = Button(
+                            windows_apps,
+                            text="Guardar",
+                            bg="#16222a",
+                            fg="#fff",
+                            width=8,
+                            height=1,
+                            command=add_apps
+                        )
+    save_button.pack(pady=5)
+
+def open_w_pages():
+    global namep_entry, pathp_entry
+    windows_pages = Toplevel() # cuarta ventana
+    windows_pages.title("Agregar una pagina web")
+    windows_pages.geometry("300x200")
+    windows_pages.resizable(0,0)
+    windows_pages.configure(bg='#434343')
+    #Ui_Main.eval(f'tk::PlaceWindow {str(windows_pages)} center') # centrar segunda ventana
+
+    title_label = Label(
+                            windows_pages,
+                            text="Agregar una pagina",
+                            fg="#fff",
+                            bg="#434343",
+                            font=('Arial', 10, 'bold')
+                        )
+    title_label.pack(pady=3)
+    name_label = Label(
+                            windows_pages,
+                            text="Nombre de la pagina",
+                            fg="#fff",
+                            bg="#434343",
+                            font=('Arial', 10, 'bold')
+                        )
+    name_label.pack(pady=2)
+
+    namep_entry = Entry(windows_pages)
+    namep_entry.pack(pady=1)
+
+    path_label = Label(
+                            windows_pages,
+                            text="URL de la pagina",
+                            fg="#fff",
+                            bg="#434343",
+                            font=('Arial', 10, 'bold')
+                        )
+    path_label.pack(pady=2)
+
+    pathp_entry = Entry(windows_pages, width=35)
+    pathp_entry.pack(pady=1)
+
+    save_button = Button(
+                            windows_pages,
+                            text="Guardar",
+                            bg="#16222a",
+                            fg="#fff",
+                            width=8,
+                            height=1,
+                            command=add_pages
+                        )
+    save_button.pack(pady=5)
+
+def open_w_contacts():
+    global namec_entry, pathc_entry
+    windows_contacts = Toplevel() # cuarta ventana
+    windows_contacts.title("Agregar contacto")
+    windows_contacts.geometry("300x200")
+    windows_contacts.resizable(0,0)
+    windows_contacts.configure(bg='#434343')
+    #Ui_Main.eval(f'tk::PlaceWindow {str(windows_contacts)} center') # centrar segunda ventana
+
+    title_label = Label(
+                            windows_contacts,
+                            text="Agregar contacto",
+                            fg="#fff",
+                            bg="#434343",
+                            font=('Arial', 10, 'bold')
+                        )
+    title_label.pack(pady=3)
+    name_label = Label(
+                            windows_contacts,
+                            text="Nombre del contacto",
+                            fg="#fff",
+                            bg="#434343",
+                            font=('Arial', 10, 'bold')
+                        )
+    name_label.pack(pady=2)
+
+    namec_entry = Entry(windows_contacts)
+    namec_entry.pack(pady=1)
+
+    path_label = Label(
+                            windows_contacts,
+                            text="Numero (codigo pais)",
+                            fg="#fff",
+                            bg="#434343",
+                            font=('Arial', 10, 'bold')
+                        )
+    path_label.pack(pady=2)
+
+    pathc_entry = Entry(windows_contacts, width=35)
+    pathc_entry.pack(pady=1)
+
+    save_button = Button(
+                            windows_contacts,
+                            text="Guardar",
+                            bg="#16222a",
+                            fg="#fff",
+                            width=8,
+                            height=1,
+                            command=add_contact
+                        )
+    save_button.pack(pady=5)
+
+#funcion para agregar archivos,paginas y apps
+
+def add_files():
+    name_file = namefile_entry.get().strip()
+    path_file = pathf_entry.get().strip()
+    files[name_file] = path_file
+    save_data(name_file, path_file, "archivos.txt")
+    namefile_entry.delete(0, "end")
+    pathf_entry.delete(0,"end")
+
+
+def add_apps():
+    name_app = nameapps_entry.get().strip()
+    path_app = pathapps_entry.get().strip()
+    programs[name_app] = path_app
+    save_data(name_app, path_app, "apps.txt")
+    nameapps_entry.delete(0, "end")
+    pathapps_entry.delete(0,"end")
+
+def add_pages():
+    name_pages = namep_entry.get().strip()
+    url_pages = pathp_entry.get().strip()
+    sites[name_pages] = url_pages
+    save_data(name_pages, url_pages, "pages.txt")
+    namep_entry.delete(0, "end")
+    pathp_entry.delete(0,"end")
+
+def add_contact():
+    name_contacto = namec_entry.get().strip()
+    path_contacto = pathc_entry.get().strip()
+    agenda[name_contacto] = path_contacto
+    save_data(name_contacto, path_contacto, "contactos.txt")
+    namec_entry.delete(0, "end")
+    pathc_entry.delete(0,"end")
+
+#funcion para guardar datos
+
+def save_data(key, value, file_name):
+    try:
+        with open(file_name, 'a') as f:
+            f.write(key + "," + value + "\n")
+    except FileNotFoundError:
+        file = open(file_name, 'a')
+        file.write(key + "," + value + "\n")
+
+#funcion para mostrar los datos almacenados
+
+def talk_pages():
+    if bool(sites) == True:
+        talk("Has agregado las siguientes paginas web")
+        for site in sites:
+            talk(site)
+    else:
+        talk("Aun no has agregado páginas web!")
+
+def talk_apps():
+    if bool(programs) == True:
+        talk("Has agregado las siguientes apps")
+        for app in programs:
+            talk(app)
+    else:
+        talk("Aun no has agregado apps!")
+
+def talk_files():
+    if bool(files) == True:
+        talk("Has agregado las siguientes archivos")
+        for file in files:
+            talk(file)
+    else:
+        talk("Aun no has agregado archivos!")
+
+def talk_contact():
+    if bool(agenda) == True:
+        talk("Has agregado los siguientes contactos")
+        for conta in agenda:
+            talk(conta)
+    else:
+        talk("Aun no hay contactos registrados!")
+
+#funcion para preguntar nombre
+def give_me_name():
+    talk("Hola, ¿Cómo te llamas?")
+    name = listen("Te escucho...")
+    name = name.strip()
+    talk(f"Bienvenido {name}")
+    try:
+        with open("name.txt", 'w') as f:
+            f.write(name)
+    except FileNotFoundError:
+        file = open("name.txt", 'w')
+        file.write(name)
+
+#funcion para decir nombre
+
+def say_hello():
+    if os.path.exists("name.txt"):
+        with open("name.txt") as f:
+            for name in f:
+                talk(f"Hola, bienvenido {name}")
+    else:
+        give_me_name()
+
+
+def thread_hello():
+    t = tr.Thread(target=say_hello)
+    t.start()
+
+#thread_hello()
 
 if __name__ == "__main__":
     import sys
@@ -834,3 +842,6 @@ if __name__ == "__main__":
     ui.setupUi(Main)
     Main.show()
     sys.exit(app.exec_())
+
+thread_hello()
+windows.mainloop()
